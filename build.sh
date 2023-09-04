@@ -23,16 +23,12 @@ KERNEL_DIR=$ROOT_DIR
 DTBO_DIR=./arch/arm64/boot/dts/exynos/dtbo
 
 # Set default kernel variables
-PROJECT_NAME="Eureka Kernel"
+PROJECT_NAME="Melyn Kernel"
 CORES=$(nproc --all)
 SELINUX_STATUS=""
 ONEUI3=0
 GCC_ARM64_FILE=aarch64-linux-gnu-
 GCC_ARM32_FILE=arm-linux-gnueabi-
-
-# Export Telegram variables
-export CHAT_ID=-0000000000000
-export BOT_TOKEN=0
 
 # Export commands
 export KBUILD_BUILD_USER=Eureka
