@@ -584,42 +584,6 @@ SELINUX() {
 	sleep 1
 }
 
-TELEGRAM_UPLOAD() {
-	# Telegram functions.
-	function tg_sendText() {
-		curl -s "https://api.telegram.org/bot$BOT_TOKEN/sendMessage" \
-		-d "parse_mode=html" \
-		-d text="${1}" \
-		-d chat_id=$CHAT_ID \
-		-d "disable_web_page_preview=true"
-	}
-	function tg_sendFile() {
-		curl -s "https://api.telegram.org/bot$BOT_TOKEN/sendDocument" \
-		-F parse_mode=markdown \
-		-F chat_id=$CHAT_ID \
-		-F document=@${1} \
-		-F "caption=$POST_CAPTION"
-	}
-
-	if [ "${BUILD_NO}" == "1" ]; then
-		for files in ./kernel_zip/aroma/*.zip; do
-			MODEL="$(echo "$files" | grep -Po $REV'_\K[^*_]+')"
-			POST_CAPTION="Eureka R$REV for $MODEL (AROMA)"
-			tg_sendFile "$files" > /dev/null
-			sleep 2
-		done
-	else
-		POST_CAPTION="$CODENAME kernel R"$REV"$ANDROID_VAR"
-
-		echo " "
-		echo " ${ON_BLUE}Uploading to Telegram ${STD}"
-		echo " "
-
-		# Upload anykernel zip
-		tg_sendFile "kernel_zip/anykernel/$ZIPNAME" > /dev/null
-	fi
-}
-
 DISPLAY_ELAPSED_TIME() {
 	# Find out how much time build has taken
 	BUILD_END=$(date +"%s")
